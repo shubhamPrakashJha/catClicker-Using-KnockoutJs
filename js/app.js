@@ -1,8 +1,8 @@
-var Cat = function () {
-    this.clickCount = ko.observable(0);
-    this.name = ko.observable('Tabby');
-    this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
-    this.nicknames = ko.observableArray(["Tabtab","T-boe","Mr. T","Catty"]);
+var Cat = function (data) {
+    this.clickCount = ko.observable(data.clickCount);
+    this.name = ko.observable(data.name);
+    this.imgSrc = ko.observable(data.imgSrc);
+    this.nicknames = ko.observableArray(data.nicknames);
     // this.imgAttribution = ko.observable("")
 
     this.levels = ko.computed(function () {
@@ -23,7 +23,12 @@ var Cat = function () {
 
 var ViewModel = function () {
     self = this;
-    this.currentCat = ko.observable(new Cat());
+    this.currentCat = ko.observable(new Cat({
+        clickCount: 0,
+        name: 'Tabby',
+        imgSrc: 'img/434164568_fea0ad4013_z.jpg',
+        nicknames: ["Tabtab","T-boe","Mr. T","Catty"]
+    }));
 
     this.incrementCounter = function () {
         self.currentCat().clickCount(self.currentCat().clickCount() +1);
